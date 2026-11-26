@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy & Terms of Service - MW Universe</title>
-  <meta name="description" content="Privacy Policy and Terms of Service for MW Universe (MW Mini) application." />
+  <title>Privacy Policy & Terms of Service - MW Mini</title>
+  <meta name="description" content="Official Privacy Policy and Terms of Service for MW Mini application." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
           </svg>
         </div>
         <div class="brand-text">
-          <span class="app-title">MW Universe</span>
+          <span class="app-title">MW Mini</span>
           <span class="app-subtitle">Privacy & Legal Center</span>
         </div>
       </div>
@@ -34,16 +34,41 @@
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="container hero-content">
-      <span class="pill-tag">Transparency & Security</span>
+      <span class="pill-tag">Offline-First & Security</span>
       <h1>Privacy Policy & Terms of Service</h1>
       <p class="hero-desc">
-        We respect your privacy. <strong>MW Universe</strong> is built with an <em>offline-first, on-device</em> architecture. Your notes, drawings, personal expenses, and scanned documents never leave your phone without your explicit consent.
+        We respect your privacy. <strong>MW Mini</strong> is built with an <em>offline-first, on-device</em> architecture. Your notes, drawings, personal expenses, and scanned documents never leave your phone without your explicit consent.
       </p>
-      <div class="quick-nav">
-        <a href="#privacy" class="btn btn-primary">Privacy Policy</a>
-        <a href="#terms" class="btn btn-secondary">Terms of Service</a>
-        <a href="#permissions" class="btn btn-secondary">Permissions</a>
-        <a href="#contact" class="btn btn-secondary">Contact Us</a>
+
+      <!-- Interactive Tab Filters -->
+      <div class="filter-tabs" id="tabFilterBar">
+        <button class="tab-btn active" data-filter="all" onclick="setPolicyTab('all')">
+          <span class="tab-icon">📑</span> <span>All Policies</span>
+        </button>
+        <button class="tab-btn" data-filter="privacy" onclick="setPolicyTab('privacy')">
+          <span class="tab-icon">🔒</span> <span>Privacy Policy</span>
+        </button>
+        <button class="tab-btn" data-filter="permissions" onclick="setPolicyTab('permissions')">
+          <span class="tab-icon">⚙️</span> <span>Permissions</span>
+        </button>
+        <button class="tab-btn" data-filter="terms" onclick="setPolicyTab('terms')">
+          <span class="tab-icon">📜</span> <span>Terms of Service</span>
+        </button>
+        <button class="tab-btn" data-filter="contact" onclick="setPolicyTab('contact')">
+          <span class="tab-icon">✉️</span> <span>Contact Us</span>
+        </button>
+      </div>
+
+      <!-- Quick Search Bar -->
+      <div class="search-box-wrap">
+        <div class="search-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="policySearch" placeholder="Search in policy (e.g. camera, storage, ads, refund)..." onkeyup="filterContent(this.value)" />
+          <button id="clearSearchBtn" onclick="clearSearch()" style="display:none;">&times;</button>
+        </div>
       </div>
     </div>
   </section>
@@ -51,38 +76,300 @@
   <!-- Main Content Layout -->
   <main class="container main-layout">
     <!-- Sidebar / Table of Contents -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="policySidebar">
       <div class="toc-card">
         <h3>Contents</h3>
         <nav class="toc-links">
-          <a href="#privacy" class="toc-link active">1. Privacy Policy</a>
-          <a href="#data-collection" class="toc-sublink">1.1 Information Collection</a>
-          <a href="#permissions" class="toc-sublink">1.2 Device Permissions</a>
-          <a href="#third-party" class="toc-sublink">1.3 Third-Party Services</a>
-          <a href="#offline-first" class="toc-sublink">1.4 On-Device & Offline Data</a>
-          <a href="#children" class="toc-sublink">1.5 Children's Privacy</a>
-          <a href="#terms" class="toc-link">2. Terms of Service</a>
-          <a href="#usage-license" class="toc-sublink">2.1 License & Acceptable Use</a>
-          <a href="#disclaimer" class="toc-sublink">2.2 Disclaimer of Warranties</a>
-          <a href="#limitation" class="toc-sublink">2.3 Limitation of Liability</a>
-          <a href="#contact" class="toc-link">3. Contact & Inquiries</a>
+          <a href="#privacy" class="toc-link active" data-target="privacy">1. Privacy Policy</a>
+          <a href="#data-collection" class="toc-sublink" data-target="data-collection">1.1 Information Collection</a>
+          <a href="#permissions" class="toc-sublink" data-target="permissions">1.2 Device Permissions</a>
+          <a href="#third-party" class="toc-sublink" data-target="third-party">1.3 Third-Party Services</a>
+          <a href="#offline-first" class="toc-sublink" data-target="offline-first">1.4 On-Device Architecture</a>
+          <a href="#children" class="toc-sublink" data-target="children">1.5 Children's Privacy</a>
+          <a href="#terms" class="toc-link" data-target="terms">2. Terms of Service</a>
+          <a href="#usage-license" class="toc-sublink" data-target="usage-license">2.1 License & Acceptable Use</a>
+          <a href="#disclaimer" class="toc-sublink" data-target="disclaimer">2.2 Disclaimer of Warranties</a>
+          <a href="#limitation" class="toc-sublink" data-target="limitation">2.3 Limitation of Liability</a>
+          <a href="#contact" class="toc-link" data-target="contact">3. Contact & Inquiries</a>
         </nav>
       </div>
     </aside>
 
     <!-- Articles -->
-    <article class="content-body">
+    <article class="content-body" id="policyContentArea">
       <!-- Section 1: Privacy Policy -->
-      <section id="privacy" class="policy-section">
+      <section id="privacy" class="policy-section" data-category="privacy">
         <div class="section-badge">Section 1</div>
-        <h2>Privacy Policy</h2>
+        <div class="section-header-row">
+          <h2>Privacy Policy</h2>
+          <button class="btn-copy-link" onclick="copySectionLink('privacy')" title="Copy Link to this Section">🔗 Copy Link</button>
+        </div>
         <p>
-          This Privacy Policy explains how <strong>MW Universe</strong> ("we", "our", or "the App") collects, uses, and safeguards your information when you use our mobile application.
+          This Privacy Policy explains how <strong>MW Mini</strong> ("we", "our", or "the App") collects, uses, and safeguards your information when you use our mobile application.
         </p>
 
         <h3 id="data-collection">1.1 Information We Collect & How We Use It</h3>
         <p>
-          We do not require you to create an account, register an email, or sign in to use MW Universe. We do not sell, rent, or monetize your personal information.
+          We do not require you to create an account, register an email, or sign in to use MW Mini. We do not sell, rent, or monetize your personal information.
         </p>
         <div class="highlight-box">
-          <strong>Key Commitment:</strong> All core feature data (Calendar
+          <strong>Key Commitment:</strong> All core feature data (Calendar events, Biorhythm calculations, Personal Notes, Draw & Art sketches, Expense records, and Scanned PDFs) are saved exclusively on your local device storage.
+        </div>
+
+        <!-- Section 1.2: Permissions -->
+        <h3 id="permissions">1.2 Device Permissions We Request</h3>
+        <p>
+          To deliver specific utility features, the App may request access to certain hardware and OS features. You can enable or revoke these at any time via your device settings:
+        </p>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Permission</th>
+                <th>Feature / Purpose</th>
+                <th>Data Handling</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Camera</strong></td>
+                <td>Document scanning, AR Drawing trace overlay, and QR code reading.</td>
+                <td>Processed in real-time in camera RAM. No footage is stored or transmitted to external servers.</td>
+              </tr>
+              <tr>
+                <td><strong>Storage / Media Files</strong></td>
+                <td>Saving and exporting your drawings, PDF files, and backup data.</td>
+                <td>Files are written directly to your chosen device folders or app private sandbox.</td>
+              </tr>
+              <tr>
+                <td><strong>Microphone / Audio</strong></td>
+                <td>Mini Piano, Drum Pad sound synthesis, or audio recording features.</td>
+                <td>Used strictly for instant sound playback or local audio effects. No audio is monitored or uploaded.</td>
+              </tr>
+              <tr>
+                <td><strong>Sensors (Compass/Magnetometer)</strong></td>
+                <td>Direction heading and compass utility calculations.</td>
+                <td>Sensor values are processed instantaneously on-device and never logged.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="third-party">1.3 Third-Party SDKs and Services</h3>
+        <p>
+          The application may integrate reputable third-party services that process minimal non-personal identifiers (such as advertising IDs or crash logs) solely to keep the service free and stable:
+        </p>
+        <ul class="styled-list">
+          <li>
+            <strong>Google Play Services & Google AdMob:</strong> May serve non-personalized or personalized advertisements to support app maintenance. You can review Google's advertising privacy policy at 
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.
+          </li>
+          <li>
+            <strong>Google ML Kit (Offline Translation & Barcode Scanning):</strong> ML model inference is executed on-device. Your scanned text and translation inputs are not sent to any cloud server.
+          </li>
+        </ul>
+
+        <h3 id="offline-first">1.4 On-Device & Offline Architecture</h3>
+        <p>
+          MW Mini is designed so that almost every core function—including lunar calendar algorithms, biorhythm mathematical models, note taking, drawing canvas, PDF viewing/signing, and offline phrasebook translation—works seamlessly without an active internet connection.
+        </p>
+
+        <h3 id="children">1.5 Children's Privacy (COPPA Compliance)</h3>
+        <p>
+          Our application does not knowingly collect or solicit any personally identifiable information from children under the age of 13. If you believe that a child has provided us with personal information, please contact us immediately, and we will take necessary measures to remove any such data.
+        </p>
+      </section>
+
+      <!-- Section 2: Terms of Service -->
+      <section id="terms" class="policy-section" data-category="terms">
+        <div class="section-badge">Section 2</div>
+        <div class="section-header-row">
+          <h2>Terms of Service</h2>
+          <button class="btn-copy-link" onclick="copySectionLink('terms')" title="Copy Link to this Section">🔗 Copy Link</button>
+        </div>
+        <p>
+          By downloading, installing, or using MW Mini, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, please uninstall and discontinue using the App.
+        </p>
+
+        <h3 id="usage-license">2.1 License & Acceptable Use</h3>
+        <p>
+          We grant you a personal, revocable, non-exclusive, non-transferable license to use the application on your personal mobile devices in accordance with these Terms. You agree not to:
+        </p>
+        <ul class="styled-list">
+          <li>Decompile, reverse engineer, or disassemble any portion of the App.</li>
+          <li>Use the App for any illegal, infringing, or harmful purposes.</li>
+          <li>Circumvent or tamper with any feature or technical protections within the App.</li>
+        </ul>
+
+        <h3 id="disclaimer">2.2 Disclaimer of Warranties</h3>
+        <p>
+          MW Mini is provided on an <strong>"AS IS"</strong> and <strong>"AS AVAILABLE"</strong> basis without warranties of any kind, whether express or implied.
+        </p>
+        <div class="notice-card">
+          <p>
+            <strong>Utility Advisory:</strong> Calculators, biorhythm charts, currency converter approximations, compass readings, and calendar conversions are provided for informational and convenience purposes only. They should not be relied upon for critical medical, financial, navigation, or legal decisions.
+          </p>
+        </div>
+
+        <h3 id="limitation">2.3 Limitation of Liability</h3>
+        <p>
+          To the maximum extent permitted by applicable law, the developer and contributors shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of data, device damage, or interruption of business arising from your use or inability to use the App.
+        </p>
+
+        <h3>2.4 Changes to These Policies</h3>
+        <p>
+          We may update our Privacy Policy and Terms of Service periodically. Any updates will be published on this page with an updated "Effective Date". Your continued use of the App following changes constitutes acceptance of the revised policies.
+        </p>
+      </section>
+
+      <!-- Section 3: Contact Us -->
+      <section id="contact" class="policy-section" data-category="contact">
+        <div class="section-badge">Section 3</div>
+        <div class="section-header-row">
+          <h2>Contact Us</h2>
+          <button class="btn-copy-link" onclick="copySectionLink('contact')" title="Copy Link to this Section">🔗 Copy Link</button>
+        </div>
+        <p>
+          If you have any questions, feedback, or data privacy inquiries regarding MW Mini, please reach out to our team:
+        </p>
+
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div class="contact-details">
+            <h4>Support & Privacy Team</h4>
+            <p>Email: <a href="mailto:support@mwmini.app">support@mwmini.app</a></p>
+            <p class="contact-sub">Response time is typically within 1-2 business days.</p>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- Back to top button -->
+  <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Back to top">
+    ↑
+  </button>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast">Link copied to clipboard!</div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 MW Mini. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#privacy" onclick="setPolicyTab('privacy')">Privacy Policy</a>
+        <span class="sep">•</span>
+        <a href="#terms" onclick="setPolicyTab('terms')">Terms of Service</a>
+        <span class="sep">•</span>
+        <a href="#permissions" onclick="setPolicyTab('permissions')">Permissions</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // 1. Tab Switching & Filtering
+    function setPolicyTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === tab);
+      });
+
+      const sections = document.querySelectorAll('.policy-section');
+      if (tab === 'all') {
+        sections.forEach(sec => sec.style.display = 'block');
+      } else if (tab === 'permissions') {
+        sections.forEach(sec => {
+          sec.style.display = (sec.id === 'privacy') ? 'block' : 'none';
+        });
+        const permEl = document.getElementById('permissions');
+        if (permEl) permEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      } else {
+        sections.forEach(sec => {
+          sec.style.display = (sec.dataset.category === tab) ? 'block' : 'none';
+        });
+      }
+
+      if (tab !== 'all') {
+        const target = document.getElementById(tab);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    // 2. Search & Filter
+    function filterContent(query) {
+      const q = query.trim().toLowerCase();
+      const clearBtn = document.getElementById('clearSearchBtn');
+      clearBtn.style.display = q.length > 0 ? 'inline-block' : 'none';
+
+      const sections = document.querySelectorAll('.policy-section');
+      if (!q) {
+        sections.forEach(sec => sec.style.display = 'block');
+        return;
+      }
+
+      sections.forEach(sec => {
+        const text = sec.innerText.toLowerCase();
+        sec.style.display = text.includes(q) ? 'block' : 'none';
+      });
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('policySearch');
+      input.value = '';
+      filterContent('');
+      input.focus();
+    }
+
+    // 3. Copy Section Link
+    function copySectionLink(id) {
+      const url = window.location.origin + window.location.pathname + '#' + id;
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('Copied link: #' + id);
+      }).catch(() => {
+        showToast('Link: ' + url);
+      });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // 4. Back to Top visibility & Scroll Spy
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('backToTop');
+      if (window.scrollY > 300) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+
+      const sections = document.querySelectorAll('.policy-section');
+      let currentId = '';
+      sections.forEach(sec => {
+        const top = sec.offsetTop - 120;
+        if (window.scrollY >= top) {
+          currentId = sec.id;
+        }
+      });
+      if (currentId) {
+        document.querySelectorAll('.toc-links a').forEach(a => {
+          a.classList.toggle('active', a.dataset.target === currentId);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
